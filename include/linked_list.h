@@ -2,7 +2,7 @@
 #define LINKED_LIST_H
 
 struct ListNode {
-    int value;
+    int val;
     ListNode* next;
 };
 
@@ -10,6 +10,7 @@ class LinkedList {
 private:
     int size;
     ListNode* head;
+    ListNode* tail;
 
 public:
     LinkedList();
@@ -22,13 +23,13 @@ public:
 
     void clear();
 
-    void insert_after(int idx, int val);
+    void insert(int idx, int val);
 
-    void push_front(int val);
+    void prepend(int val);
 
-    void push_back(int val);
+    void append(int val);
 
-    void remove_at(int idx);
+    void remove(int idx);
 
     ListNode* pop_front();
 

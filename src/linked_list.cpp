@@ -1,7 +1,9 @@
 #include "inc/linked_list.h"
 
 LinkedList::LinkedList() {
-
+    size = 0;
+    head = nullptr;
+    tail = nullptr;
 }
 
 LinkedList::LinkedList(const LinkedList& rhs) {
@@ -20,19 +22,34 @@ void LinkedList::clear() {
 
 }
 
-void LinkedList::insert_after(int idx, int val) {
+void LinkedList::insert(int idx, int val) {
 
 }
 
-void LinkedList::push_front(int val) {
+void LinkedList::prepend(int val) {
+    ListNode* new_node = new ListNode{val, head};
 
+    if (head == nullptr) {
+        tail = new_node;
+    }
+    head = new_node;
+    size++; 
 }
 
-void LinkedList::push_back(int val) {
-
+void LinkedList::append(int val) {
+    ListNode* new_node = new ListNode{val, nullptr};
+    
+    if (head == nullptr) {
+        head = new_node;
+    }
+    else {
+        tail->next = new_node;
+    }
+    tail = new_node;
+    size++;
 }
 
-void LinkedList::remove_at(int idx) {
+void LinkedList::remove(int idx) {
 
 }
 
