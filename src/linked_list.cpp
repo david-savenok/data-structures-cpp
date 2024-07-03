@@ -1,7 +1,7 @@
-#include "inc/linked_list.h"
+#include "include/linked_list.h"
 
 LinkedList::LinkedList() {
-    size = 0;
+    size_val = 0;
     head = nullptr;
     tail = nullptr;
 }

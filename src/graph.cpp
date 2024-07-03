@@ -1,4 +1,4 @@
-#include "inc/graph.h"
+#include "include/graph.h"
 
 Graph::Graph() {
 
