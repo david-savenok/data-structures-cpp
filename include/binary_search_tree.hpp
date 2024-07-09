@@ -1,5 +1,5 @@
-#ifndef BINARY_SEARCH_TREE_H
-#define BINARY_SEARCH_TREE_H
+#ifndef BINARY_SEARCH_TREE_HPP
+#define BINARY_SEARCH_TREE_HPP
 
 struct TreeNode {
     int val;

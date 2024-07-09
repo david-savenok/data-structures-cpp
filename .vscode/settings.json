@@ -6,6 +6,6 @@
         "type_traits": "cpp",
         "utility": "cpp"
     },
-    "cmake.sourceDirectory": "/Users/david/Documents/Projects/data-structures-cpp/build",
+    "cmake.sourceDirectory": "/workspaces/data-structures-cpp/build",
     "C_Cpp.errorSquiggles": "disabled"
 }

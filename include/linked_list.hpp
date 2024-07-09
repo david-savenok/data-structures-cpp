@@ -1,5 +1,5 @@
-#ifndef LINKED_LIST_H
-#define LINKED_LIST_H
+#ifndef LINKED_LIST_HPP
+#define LINKED_LIST_HPP
 
 struct ListNode {
     int val;
@@ -8,7 +8,7 @@ struct ListNode {
 
 class LinkedList {
 private:
-    int size;
+    int size_val;
     ListNode* head;
     ListNode* tail;
 
@@ -36,6 +36,8 @@ public:
     ListNode* pop_back();
 
     ListNode* front() const;
+
+    ListNode* back() const;
 
     bool empty() const;
 
