@@ -8,7 +8,7 @@ LinkedList::LinkedList(const LinkedList& rhs) : size_val(0), head(nullptr), tail
     ListNode* curr = rhs.head;
 
     while (curr != nullptr) {
-        this->append(curr.val);
+        this->append(curr->val);
         curr = curr->next;
     }
 }
@@ -19,7 +19,7 @@ LinkedList& LinkedList::operator=(const LinkedList& rhs) {
         ListNode* curr = rhs.head;
 
         while (curr != nullptr) {
-            this->append(curr.val);
+            this->append(curr->val);
             curr = curr->next;
         }
     }
@@ -123,6 +123,20 @@ void LinkedList::remove(int idx) {
     }
 }
 
+ListNode* LinkedList::at(int idx) {
+    int pos = 0;
+    ListNode* curr = head;
+
+    while (curr != nullptr) {
+        if (pos == idx) {
+            return curr;
+        }
+        pos++;
+        curr = curr->next;
+    }
+    return nullptr;
+}
+
 ListNode* LinkedList::pop_front() {
     if (head == nullptr) return nullptr;
     ListNode* temp = head;
@@ -137,19 +151,22 @@ ListNode* LinkedList::pop_front() {
 
 ListNode* LinkedList::pop_back() {
     if (head == nullptr) return nullptr;
-    ListNode* temp = head;
+    ListNode* curr = head;
 
     if (head == tail) {
         size_val--;
         head = nullptr;
         tail = nullptr;
-        return temp;
+        return curr;
     }
-    while (temp->next != tail) {
-        temp = temp->next;
+    while (curr->next != tail) {
+        curr = curr->next;
     }
-    temp->next = tail->next;
-    return tail;
+    curr->next = tail->next;
+    ListNode* temp = tail;
+    tail = curr;
+    size_val--;
+    return temp;
 }
 
 ListNode* LinkedList::front() const {
@@ -161,7 +178,7 @@ ListNode* LinkedList::back() const {
 }
 
 bool LinkedList::empty() const {
-    if (size == 0) return true;
+    if (size_val == 0) return true;
     return false;
 }
 

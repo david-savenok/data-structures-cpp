@@ -31,6 +31,8 @@ public:
 
     void remove(int idx);
 
+    ListNode* at(int idx);
+
     ListNode* pop_front();
 
     ListNode* pop_back();
