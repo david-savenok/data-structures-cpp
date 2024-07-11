@@ -1,4 +1,4 @@
-.devcontainer
-.vscode
-.github
-linked_list_tests.dSYM
+.devcontainer/
+.vscode/
+.github/
+/bin/linked_list_tests.dSYM/
