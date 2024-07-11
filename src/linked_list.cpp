@@ -52,9 +52,6 @@ void LinkedList::insert(int idx, int val) {
         if (pos == idx) {
             ListNode* new_node = new ListNode{val, curr};
             if (curr == head) {
-                if (curr == tail) {
-                    tail = new_node;
-                }
                 head = new_node;
                 size_val++;
                 return;

@@ -66,19 +66,24 @@ TEST_CASE("testing append method", "[append]") {
     REQUIRE(list.size() == 1);
     REQUIRE(list.back()->val == 0);
     REQUIRE(list.front()->val == 0);
+    // 0
 
     list.append(1);
     REQUIRE(list.size() == 2);
     REQUIRE(list.back()->val == 1);
     REQUIRE(list.front()->val == 0);
+    // 0 -> 1
 
     list.remove(0);
     REQUIRE(list.size() == 1);
     REQUIRE(list.back()->val == 1);
+    // 1
 
     list.append(2);
     REQUIRE(list.size() == 2);
     REQUIRE(list.back()->val == 2);
+    REQUIRE(list.front()->val == 1);
+    // 1 -> 2
 }
 
 TEST_CASE("testing prepend method", "[prepend]") {
@@ -88,21 +93,25 @@ TEST_CASE("testing prepend method", "[prepend]") {
     REQUIRE(list.size() == 1);
     REQUIRE(list.back()->val == 0);
     REQUIRE(list.front()->val == 0);
+    // 0
 
     list.prepend(1);
     REQUIRE(list.size() == 2);
     REQUIRE(list.front()->val == 1);
     REQUIRE(list.back()->val == 0);
+    // 1 -> 0
 
     list.remove(0);
     REQUIRE(list.size() == 1);
     REQUIRE(list.front()->val == 0);
     REQUIRE(list.back()->val == 0);
+    // 0
 
     list.prepend(2);
     REQUIRE(list.size() == 2);
     REQUIRE(list.front()->val == 2);
     REQUIRE(list.back()->val == 0);
+    // 2 -> 0
 }
 
 TEST_CASE("testing pop_front method", "[pop_front]") {
@@ -112,6 +121,7 @@ TEST_CASE("testing pop_front method", "[pop_front]") {
     list.append(1);
     list.append(2);
     list.append(3);
+    // 0 -> 1 -> 2 -> 3
 
     REQUIRE(list.size() == 4);
 
@@ -119,16 +129,19 @@ TEST_CASE("testing pop_front method", "[pop_front]") {
     REQUIRE(list.size() == 3);
     REQUIRE(list.front()->val == 1);
     REQUIRE(list.back()->val == 3);
+    // 1 -> 2 -> 3
 
     REQUIRE(list.pop_front()->val == 1);
     REQUIRE(list.size() == 2);
     REQUIRE(list.front()->val == 2);
     REQUIRE(list.back()->val == 3);
+    // 2 -> 3
 
     REQUIRE(list.pop_front()->val == 2);
     REQUIRE(list.size() == 1);
     REQUIRE(list.front()->val == 3);
     REQUIRE(list.back()->val == 3);
+    // 3
 
     REQUIRE(list.pop_front()->val == 3);
     REQUIRE(list.size() == 0);
@@ -148,6 +161,7 @@ TEST_CASE("testing pop_back method", "[pop_back]") {
     list.append(1);
     list.append(2);
     list.append(3);
+    // 0 -> 1 -> 2 -> 3
 
     REQUIRE(list.size() == 4);
 
@@ -155,16 +169,19 @@ TEST_CASE("testing pop_back method", "[pop_back]") {
     REQUIRE(list.size() == 3);
     REQUIRE(list.front()->val == 0);
     REQUIRE(list.back()->val == 2);
+    // 0 -> 1 -> 2
 
     REQUIRE(list.pop_back()->val == 2);
     REQUIRE(list.size() == 2);
     REQUIRE(list.front()->val == 0);
     REQUIRE(list.back()->val == 1);
+    // 0 -> 1
 
     REQUIRE(list.pop_back()->val == 1);
     REQUIRE(list.size() == 1);
     REQUIRE(list.front()->val == 0);
     REQUIRE(list.back()->val == 0);
+    // 0
 
     REQUIRE(list.pop_back()->val == 0);
     REQUIRE(list.size() == 0);
@@ -201,38 +218,80 @@ TEST_CASE("testing remove method", "[remove]") {
     list.append(3);
     list.append(4);
     list.append(5);
+    // 0 -> 1 -> 2 -> 3 -> 4 -> 5
 
     list.remove(2);
     REQUIRE(list.size() == 5);
     REQUIRE(list.at(2)->val == 3);
+    // 0 -> 1 -> 3 -> 4 -> 5
 
     list.remove(0);
     REQUIRE(list.size() == 4);
     REQUIRE(list.at(0)->val == 1);
     REQUIRE(list.front()->val == 1);
     REQUIRE(list.back()->val == 5);
+    // 1 -> 3 -> 4 -> 5
 
     list.remove(3);
     REQUIRE(list.size() == 3);
     REQUIRE(list.at(2)->val == 4);
     REQUIRE(list.back()->val == 4);
     REQUIRE(list.front()->val == 1);
+    // 1 -> 3 -> 4
 
     list.remove(0);
     REQUIRE(list.size() == 2);
     REQUIRE(list.at(0)->val == 3);
     REQUIRE(list.back()->val == 4);
     REQUIRE(list.front()->val == 3);
+    // 3 -> 4
 
     list.remove(1);
     REQUIRE(list.size() == 1);
     REQUIRE(list.at(0)->val == 3);
     REQUIRE(list.front()->val == 3);
     REQUIRE(list.back()->val == 3);
+    // 3
 
     list.remove(0);
     REQUIRE(list.size() == 0);
     REQUIRE(list.at(0) == nullptr);
     REQUIRE(list.back() == nullptr);
     REQUIRE(list.front() == nullptr);
+}
+
+TEST_CASE("testing insert method", "[insert]") {
+    LinkedList list = LinkedList();
+
+    list.insert(0, 0);
+    REQUIRE(list.size() == 0);
+    REQUIRE(list.front() == nullptr);
+
+    list.append(0);
+    list.insert(1, 1);
+    REQUIRE(list.size() == 1);
+    REQUIRE(list.front()->val == 0);
+    REQUIRE(list.back()->val == 0);
+    // 0
+
+    list.insert(0, -1);
+    REQUIRE(list.size() == 2);
+    REQUIRE(list.front()->val == -1);
+    REQUIRE(list.back()->val == 0);
+    // -1 -> 0
+
+    list.insert(1, 2);
+    REQUIRE(list.size() == 3);
+    REQUIRE(list.at(1)->val == 2);
+    REQUIRE(list.front()->val == -1);
+    REQUIRE(list.back()->val == 0);
+    // -1 -> 2 -> 0
+
+    list.insert(1, 3);
+    REQUIRE(list.size() == 4);
+    REQUIRE(list.at(2)->val == 2);
+    REQUIRE(list.at(1)->val == 3);
+    REQUIRE(list.front()->val == -1);
+    REQUIRE(list.back()->val == 0);
+    // -1 -> 3 -> 2 -> 0
 }
