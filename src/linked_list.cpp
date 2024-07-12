@@ -120,22 +120,22 @@ void LinkedList::remove(int idx) {
     }
 }
 
-ListNode* LinkedList::at(int idx) {
+int LinkedList::at(int idx) {
     int pos = 0;
     ListNode* curr = head;
 
     while (curr != nullptr) {
         if (pos == idx) {
-            return curr;
+            return curr->val;
         }
         pos++;
         curr = curr->next;
     }
-    return nullptr;
+    throw std::out_of_range("ERROR: trying to access out of range index");
 }
 
-ListNode* LinkedList::pop_front() {
-    if (head == nullptr) return nullptr;
+int LinkedList::pop_front() {
+    if (head == nullptr) throw std::runtime_error("ERROR: attempting to pop_front empty list");
     ListNode* temp = head;
     
     if (head == tail) {
@@ -143,18 +143,18 @@ ListNode* LinkedList::pop_front() {
     }
     head = head->next;
     size_val--;
-    return temp;
+    return temp->val;
 }
 
-ListNode* LinkedList::pop_back() {
-    if (head == nullptr) return nullptr;
+int LinkedList::pop_back() {
+    if (head == nullptr) throw std::runtime_error("ERROR: attempting to pop_back empty list");
     ListNode* curr = head;
 
     if (head == tail) {
         size_val--;
         head = nullptr;
         tail = nullptr;
-        return curr;
+        return curr->val;
     }
     while (curr->next != tail) {
         curr = curr->next;
@@ -163,15 +163,17 @@ ListNode* LinkedList::pop_back() {
     ListNode* temp = tail;
     tail = curr;
     size_val--;
-    return temp;
+    return temp->val;
 }
 
-ListNode* LinkedList::front() const {
-    return head;
+int LinkedList::front() const {
+    if (head == nullptr) throw std::runtime_error("ERROR: attempting to access front of empty list");
+    return head->val;
 }
 
-ListNode* LinkedList::back() const {
-    return tail;
+int LinkedList::back() const {
+    if (tail == nullptr) throw std::runtime_error("ERROR: attempting to access back of empty list");
+    return tail->val;
 }
 
 bool LinkedList::empty() const {

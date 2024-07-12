@@ -1,6 +1,8 @@
 #ifndef LINKED_LIST_HPP
 #define LINKED_LIST_HPP
 
+#include <stdexcept>
+
 struct ListNode {
     int val;
     ListNode* next;
@@ -31,15 +33,15 @@ public:
 
     void remove(int idx);
 
-    ListNode* at(int idx);
+    int at(int idx);
 
-    ListNode* pop_front();
+    int pop_front();
 
-    ListNode* pop_back();
+    int pop_back();
 
-    ListNode* front() const;
+    int front() const;
 
-    ListNode* back() const;
+    int back() const;
 
     bool empty() const;
 

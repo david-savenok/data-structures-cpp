@@ -1,4 +1,4 @@
-#include "include/binary_search_tree.hpp"
+#include "../include/binary_search_tree.hpp"
 
 BinarySearchTree::BinarySearchTree() {
 
