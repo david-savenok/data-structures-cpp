@@ -1,4 +1,4 @@
-#include "../include/linked_list.hpp"
+#include "linked_list.hpp"
 
 LinkedList::LinkedList() : size_val(0), head(nullptr), tail(nullptr) {
 
@@ -47,6 +47,8 @@ void LinkedList::insert(int idx, int val) {
     int pos = 0;
     ListNode* curr = head;
     ListNode* prev = nullptr;
+
+    if (idx >= size_val) throw std::out_of_range("Index not within list bounds");
 
     while (curr != nullptr) {
         if (pos == idx) {
@@ -143,7 +145,9 @@ int LinkedList::pop_front() {
     }
     head = head->next;
     size_val--;
-    return temp->val;
+    int temp_val = temp->val;
+    delete temp;
+    return temp_val;
 }
 
 int LinkedList::pop_back() {
@@ -154,16 +158,20 @@ int LinkedList::pop_back() {
         size_val--;
         head = nullptr;
         tail = nullptr;
-        return curr->val;
+        int temp_val = curr->val;
+        delete curr;
+        return temp_val;
     }
     while (curr->next != tail) {
         curr = curr->next;
     }
     curr->next = tail->next;
     ListNode* temp = tail;
+    int temp_val = temp->val;
     tail = curr;
     size_val--;
-    return temp->val;
+    delete temp;
+    return temp_val;
 }
 
 int LinkedList::front() const {

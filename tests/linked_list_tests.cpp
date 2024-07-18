@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "../include/linked_list.hpp"
+#include "linked_list.hpp"
 
 TEST_CASE("testing default constructor", "[constructor]") {
     LinkedList list = LinkedList();
@@ -263,12 +263,12 @@ TEST_CASE("testing remove method", "[remove]") {
 TEST_CASE("testing insert method", "[insert]") {
     LinkedList list = LinkedList();
 
-    list.insert(0, 0);
+    REQUIRE_THROWS(list.insert(0, 0));
     REQUIRE(list.size() == 0);
     REQUIRE_THROWS(list.front());
 
     list.append(0);
-    list.insert(1, 1);
+    REQUIRE_THROWS(list.insert(1, 1));
     REQUIRE(list.size() == 1);
     REQUIRE(list.front() == 0);
     REQUIRE(list.back() == 0);
@@ -294,4 +294,54 @@ TEST_CASE("testing insert method", "[insert]") {
     REQUIRE(list.front() == -1);
     REQUIRE(list.back() == 0);
     // -1 -> 3 -> 2 -> 0
+
+    REQUIRE_THROWS(list.insert(5, 5));
+    REQUIRE_THROWS(list.insert(4, 4));
+    REQUIRE(list.size() == 4);
+    REQUIRE(list.back() == 0);
+}
+
+TEST_CASE("testing clear method", "[clear]") {
+    LinkedList list = LinkedList();
+
+    list.append(0);
+    list.append(1);
+    list.append(2);
+    list.append(3);
+
+    list.clear();
+    REQUIRE(list.size() == 0);
+    REQUIRE_THROWS(list.front());
+    REQUIRE_THROWS(list.back());
+}
+
+TEST_CASE("testing copy assignment operator", "[copy_assignment]") {
+    LinkedList list = LinkedList();
+
+    list.append(0);
+    list.append(1);
+
+    LinkedList list_copy = LinkedList();
+    list_copy = list;
+
+    REQUIRE(list_copy.size() == list.size());
+    REQUIRE(list_copy.front() == list.front());
+    REQUIRE(list_copy.back() == list.back());
+    REQUIRE(list_copy.at(0) == list.at(0));
+    REQUIRE(list_copy.at(1) == list.at(1));
+}
+
+TEST_CASE("testing copy constructor", "[copy_constructor]") {
+    LinkedList list = LinkedList();
+
+    list.append(0);
+    list.append(1);
+
+    LinkedList list_copy(list);
+
+    REQUIRE(list_copy.size() == list.size());
+    REQUIRE(list_copy.front() == list.front());
+    REQUIRE(list_copy.back() == list.back());
+    REQUIRE(list_copy.at(0) == list.at(0));
+    REQUIRE(list_copy.at(1) == list.at(1));
 }
